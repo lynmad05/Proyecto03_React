@@ -1,107 +1,320 @@
-/* HEADER */
+/* ================= GLOBAL ================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fefefe; /* fondo blanco neutro */
+    color: #222;
+}
+
+/* ================= HEADER ================= */
 .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 50px;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); 
-    color: #fff;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    position: relative;
-    font-family: 'Arial', sans-serif;
-    z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #0e0e10; /* fondo oscuro profesional */
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
-.main-header a {
-    color: #fff;
-    text-decoration: none;
-    margin-right: 25px;
-    font-weight: 600;
-    font-size: 1em;
-    transition: color 0.3s ease, transform 0.3s ease;
+.logo a {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00bfa6; /* jade */
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  transition: color 0.3s;
 }
 
-.main-header a:hover {
-    color: #ffcc00; 
-    transform: translateY(-2px);
+.logo a:hover {
+  color: #fff;
 }
 
 .main-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.main-nav li {
-    margin-left: 30px;
+.main-nav li a {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.main-nav li a:hover {
+  background: #00bfa6;
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 
-/* FOOTER */
-.main-footer {
+/* ================= CARRUSEL ================= */
+.main-carousel-container {
     position: relative;
-    padding: 50px 20px;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    color: #f0f0f0;
-    text-align: center;
-    font-family: 'Arial', sans-serif;
     overflow: hidden;
 }
 
-.main-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -50%;
-    width: 200%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    transform: skewY(-10deg);
-    pointer-events: none;
+.carousel-image-wrapper {
+    position: relative;
+    min-height: 90vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
 }
 
-.main-footer h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    color: #ffcc00;
-    letter-spacing: 2px;
-}
-
-.main-footer p {
-    margin: 10px 0;
-    font-size: 0.95em;
-    line-height: 1.6;
-    color: #ddd;
-}
-
-.main-footer a {
-    color: #ffcc00;
-    text-decoration: none;
-    margin: 0 10px;
-    font-weight: bold;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.main-footer a:hover {
+.carousel-content {
+    max-width: 700px;
     color: #fff;
-    transform: scale(1.1);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
 
-.main-footer .social-icons {
-    margin-top: 25px;
+.carousel-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
 }
 
-.main-footer .social-icons a {
-    display: inline-block;
-    margin: 0 10px;
-    font-size: 1.4em;
-    transition: transform 0.3s, color 0.3s;
+.carousel-content p {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
 }
 
-.main-footer .social-icons a:hover {
-    color: #ffcc00;
-    transform: translateY(-5px);
+.carousel-content button {
+    padding: 12px 28px;
+    background-color: #00bfa5;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.carousel-content button:hover {
+    background-color: #26c6da;
+}
+
+/* Dots dentro del carrusel */
+.slick-dots {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    justify-content: center !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 20 !important;
+}
+
+.slick-dots li {
+    margin: 0 6px;
+}
+
+.slick-dots li button:before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    opacity: 1;
+}
+
+.slick-dots li.slick-active button:before {
+    background: #00bfa5;
+}
+
+/* ================= SECCIONES ================= */
+.home-page {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+
+.hero-banner {
+  padding: 40px 20px;
+  text-align: center;
+  background: transparent;
+  color: #14213d;
+  width: 100%;
+}
+
+.hero-banner h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.hero-banner p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+
+/* Estrenos de la semana */
+.peliculas-destacadas {
+    padding: 60px 20px;
+    background-color: #fefefe;
+}
+
+.peliculas-destacadas h2 {
+    margin-bottom: 35px;
+    color: #00bfa5;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.peliculas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.pelicula-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pelicula-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.pelicula-card img {
+    width: 100%;
+    object-fit: cover;
+    height: 300px;
+    transition: transform 0.3s;
+}
+
+.pelicula-card img:hover {
+    transform: scale(1.05);
+}
+
+.card-info {
+    padding: 15px;
+    color: #222;
+}
+
+/* ================= PROMOCIONES ================= */
+.promociones {
+    padding: 60px 20px;
+    background-color: #e0f2f1; /* jade muy claro */
+    color: #004d40; /* jade oscuro */
+    text-align: center;
+    border-top: 4px solid #00bfa5;
+    border-bottom: 4px solid #00bfa5;
+}
+
+.promociones h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.promociones p {
+    font-size: 1.2rem;
+}
+
+/* ================= FOOTER ================= */
+.main-footer {
+  background: #0e0e10;
+  color: #eaeaea;
+  padding: 60px 40px 30px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-column {
+  flex: 1 1 220px;
+}
+
+.footer-column h4 {
+  color: #00bfa6; 
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column li {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #bbb;
+  transition: color 0.3s;
+}
+
+.footer-column li a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-column li:hover {
+  color: #fff;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  font-size: 1.7rem; 
+}
+
+.social-icons a {
+  color: #bbb;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-icons a:hover {
+  color: #00bfa6;
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  border-top: 1px solid #222;
+  margin-top: 40px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 1rem;
+  color: #aaa;
 }

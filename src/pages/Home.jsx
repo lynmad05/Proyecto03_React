@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import MiniMovieCard from '../components/MiniMovieCard';
+import MovieCarrusel from '../components/MovieCarrusel';
 
 const Home = () => {
 
@@ -7,7 +9,6 @@ const Home = () => {
 
     const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
     const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
-    const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
     useEffect(() => {
         const fetchDestacadas = async () =>{
@@ -28,14 +29,21 @@ const Home = () => {
             }
         };
         fetchDestacadas();
-    }, []);
+    }, [API_KEY, BASE_URL]);
 
     if (cargando){
         return <div className='loading-state'>Cargando...</div>;
     }
 
+
+    const peliculaPrincipal = peliculas[0];
+    const peliculasEnTarjetas = peliculas.slice(1, 9)
+
     return (
         <div className='home-page'>
+
+           {peliculas.length > 0 && <MovieCarrusel peliculas={peliculas} />}
+
             <section className='hero-banner'>
                 <h1>Bienvenido a Cineplanet</h1>
                 <p>Vive la emoción del cine. ¡Revisa nuestra cartelera!</p>
@@ -45,16 +53,8 @@ const Home = () => {
             <h2>Estrenos de la semana</h2>
             <div className='peliculas-container'>
                 {peliculas.map(pelicula =>(
-                    <div key={pelicula.id} className='pelicula-card'>
-                        <img 
-                            src={`${IMG_BASE_URL}${pelicula.poster_path}`} 
-                            alt={pelicula.title} 
-                        />                     
-                        <h3>{pelicula.title}</h3>
-                        <p>Rating: {pelicula.vote_average}</p>
-                        <p className="resumen">{pelicula.overview.substring(0, 100)}...</p>
-                    </div>
-                ))}
+                <MiniMovieCard key={pelicula.id} pelicula={pelicula} />
+            ))}
             </div>
         </section>
             
