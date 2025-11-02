@@ -100,21 +100,6 @@ html, body {
     margin-bottom: 20px;
 }
 
-.carousel-content button {
-    padding: 12px 28px;
-    background-color: #00bfa5;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.carousel-content button:hover {
-    background-color: #26c6da;
-}
-
 /* Dots dentro del carrusel */
 .slick-dots {
     position: absolute !important;
@@ -146,8 +131,9 @@ html, body {
     background: #00bfa5;
 }
 
-/* ================= SECCIONES ================= */
-.home-page {
+/* ================= SECCIONES (HOME Y CARTELERA) ================= */
+.home-page,
+.cartelera-page {
     width: 100%;
     overflow-x: hidden;
 }
@@ -176,23 +162,35 @@ html, body {
 }
 
 
-/* Estrenos de la semana */
-.peliculas-destacadas {
+/* Estrenos de la semana y Listado de Cartelera */
+.peliculas-destacadas,
+.listado-peliculas {
     padding: 60px 20px;
     background-color: #fefefe;
 }
 
-.peliculas-destacadas h2 {
+.peliculas-destacadas h2,
+.listado-peliculas h2 {
     margin-bottom: 35px;
     color: #00bfa5;
     font-size: 2rem;
     text-align: center;
 }
 
+.listado-peliculas p {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: -20px;
+    margin-bottom: 35px;
+    color: #555;
+}
+
 .peliculas-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .pelicula-card {
@@ -224,6 +222,13 @@ html, body {
     padding: 15px;
     color: #222;
 }
+
+/* Para enlaces que envuelven tarjetas */
+.pelicula-card-link {
+    text-decoration: none;
+    color: inherit; /* Hereda el color del texto */
+}
+
 
 /* ================= PROMOCIONES ================= */
 .promociones {

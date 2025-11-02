@@ -1,0 +1,224 @@
+/* ================= PAGINA DETALLE PELICULA ================= */
+
+/* El contenedor principal de la página */
+.detalle-pelicula-page {
+    position: relative;
+    color: white;
+    
+    /* Hack para forzar el ancho completo */
+    width: 100vw; 
+    margin-left: calc(50% - 50vw);
+}
+
+/* El contenedor que tiene el fondo, el overlay Y el contenido */
+.backdrop-image {
+    position: relative; /* Ya no es absolute */
+    width: 100%;
+    /* Altura mínima (menos 80px del header). Ajusta 80px si tu header es más alto */
+    min-height: calc(100vh - 80px); 
+    background-size: cover;
+    background-position: center;
+    
+    /* Usamos flex para centrar el .detalle-content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* El overlay oscuro */
+.backdrop-image .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Cubre al padre .backdrop-image */
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.9) 100%);
+    z-index: 1; /* Detrás del contenido */
+}
+
+/* El contenido (poster, texto, etc.) */
+.detalle-content {
+    position: relative;
+    z-index: 2; /* Encima del overlay */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    /* Padding para el header (120px) y abajo (40px) */
+    padding: 120px 20px 40px 20px; 
+    box-sizing: border-box;
+    text-align: center; /* Centrado para móvil */
+}
+
+/* En pantallas grandes, alineamos a la izquierda */
+@media (min-width: 768px) {
+    .detalle-content {
+        flex-direction: row;
+        text-align: left; 
+        align-items: flex-start;
+        padding: 120px 40px 40px 40px;
+    }
+}
+
+
+.detalle-poster {
+    width: 250px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+    flex-shrink: 0; /* Evita que se encoja */
+}
+
+@media (min-width: 768px) {
+    .detalle-poster {
+        width: 300px;
+        margin-right: 40px;
+        margin-bottom: 0;
+    }
+}
+
+
+.info-text {
+    flex: 1;
+}
+
+.info-text h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+.info-text .tagline {
+    font-style: italic;
+    opacity: 0.8;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.info-text .overview {
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.details-grid p {
+    margin: 0;
+}
+
+.details-grid strong {
+    color: #00bfa6; /* ¡Color jade para consistencia! */
+}
+
+/* ================= BOTONES Y UTILES ================= */
+
+/* Esta clase .btn-primary la usa el botón "Ver Trailer" */
+.btn-primary {
+    display: inline-block;
+    background-color: #00bfa6; /* ¡Color jade! */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s;
+    text-decoration: none; /* Para que funcione en Links */
+}
+
+.btn-primary:hover {
+    background-color: #00897b; /* Un jade un poco más oscuro */
+    transform: scale(1.05);
+}
+
+/* Estados de carga y error */
+.loading-state, .error-state {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.5em;
+    color: #d32f2f; /* Un rojo estándar para errores */
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    cursor: pointer;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #0e0e10;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    z-index: 2001;
+    cursor: default;
+}
+
+.modal-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background-color: #00bfa6; 
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    z-index: 2002;
+    transition: transform 0.2s ease;
+}
+
+.modal-close:hover {
+    transform: scale(1.1);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

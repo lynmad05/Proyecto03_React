@@ -36,9 +36,6 @@ const Home = () => {
     }
 
 
-    const peliculaPrincipal = peliculas[0];
-    const peliculasEnTarjetas = peliculas.slice(1, 9)
-
     return (
         <div className='home-page'>
 

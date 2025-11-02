@@ -1,5 +1,5 @@
-import React from 'react';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
 
 const IMG_BASE_URL = 'https://image.tmdb.org/t/p/original';
 
@@ -9,12 +9,17 @@ const MovieCarousel = ({ peliculas }) => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 600,
+    speed: 600,  
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: true,     
     fade: true,
     pauseOnHover: true,
+    
+    
+    autoplay: true,      
+    autoplaySpeed: 5000, 
+    
   };
 
   return (
@@ -31,7 +36,9 @@ const MovieCarousel = ({ peliculas }) => {
               <div className="carousel-content">
                 <h2>{pelicula.title}</h2>
                 <p>{pelicula.overview.substring(0, 150)}...</p>
-                <button>Ver Ahora</button>
+                <Link to={`/pelicula/${pelicula.id}`} className='btn-primary'>
+                  Ver Ahora
+                </Link>
               </div>
             </div>
           </div>
